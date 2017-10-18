@@ -27,6 +27,7 @@ The goals / steps of this project are the following:
 [image6]: ./test_images/example_28.png "Traffic Sign 3"
 [image7]: ./test_images/example_39.png "Traffic Sign 4"
 [image8]: ./test_images/example_40.png "Traffic Sign 5"
+[image9]: https://camo.githubusercontent.com/3b43f4d1f9a91e44b0373838537daed273b740a0/68747470733a2f2f6769746875622e636f6d2f6a6572656d792d7368616e6e6f6e2f4361724e442d4c654e65742d4c61622f7261772f636434626139373930363137366536303230613462336330383462373531386566336464656435652f6c656e65742e706e67 "Source: Yan LeCun"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -83,6 +84,7 @@ The difference between the original data set and the augmented data set is the f
 ####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
 I use the same architecture from the LeNet Lab [LeNet](https://github.com/udacity/CarND-LeNet-Lab/blob/master/LeNet-Lab-Solution.ipynb)
+![alt text][image9]
 
 My final model consisted of the following layers:
 
@@ -98,10 +100,8 @@ My final model consisted of the following layers:
 | Flatten layers (5x5x16 -> 400) |
 | Fully connected		| 400 -> 120 |  
 | ReLU					|
-| Dropout  |
 | Fully connected		| 120 -> 84 | 
 | ReLU					|
-| Dropout  |
 | Fully connected		| 84 -> 43 | 
  
 
@@ -115,7 +115,6 @@ The final settings used were:
 * learning rate: 0.001
 * mu: 0
 * sigma: 0.1
-* dropout keep probability: 0.5
 
 ####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
@@ -140,11 +139,11 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Speed limit (20km/h)      		| Speed limit (20km/h)   									| 
+| Double curve     			| Double curve 										|
+| Children crossing					| Children crossing											|
+| Keep left      		| Keep left				 				|
+| Roundabout mandatory			| Roundabout mandatory      							|
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
@@ -155,13 +154,13 @@ The code for making predictions on my final model is located in the 11th cell of
 
 For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
 
-| Probability         	|     Prediction	        					| 
+| Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
+| .60         			| Stop sign   									| 
+| .20     				| U-turn 										|
 | .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| .04	      			| Bumpy Road					 				|
+| .01				    | Slippery Road      							|
 
 
 For the second image ... 
