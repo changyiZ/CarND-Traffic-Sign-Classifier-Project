@@ -155,10 +155,10 @@ The code for making predictions on my final model is located in the last two cod
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
 | 1.0         			|  Speed limit (20km/h)   									| 
-| 1.0     				| Double curve 										|
-| 1.0					| Children crossing											|
-| 1.0	      			| Keep left				 				|
-| 1.0				    | Roundabout mandatory      							|
+| 1.0     				   | Double curve 										|
+| 1.0					       | Children crossing											|
+| 1.0	      			  | Keep left				 				|
+| 1.0				        | Roundabout mandatory      							|
 
 
 Here is top 3 prediction graph below:
