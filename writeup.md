@@ -31,7 +31,7 @@ The goals / steps of this project are the following:
 [image10]: ./samples/augmentation_data_graph.jpg "Augmentation graph"
 [image11]: ./samples/sample_normalized.jpg "Normalized sample"
 [image12]: ./samples/sample_prediction.jpg "New image prediction"
-[image13]: ./samples/modified_LeNet.jpg "Modified LeNet"
+[image13]: ./samples/modified_LeNet.jpeg "Modified LeNet"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -86,6 +86,7 @@ Here is an example of an original image and an augmented image:
 
 The difference between the original data set and the augmented data set is the following ... 
 ![alt text][image10]
+For classes of which the number is below 800, we add augmentation to make it up to 800.
 
 ####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
