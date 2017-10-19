@@ -19,15 +19,19 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
+[image1]: ./samples/training_data_graph.jpg "Train graph"
+[image2]: ./samples/sample_grayscale.jpg "Grayscaling"
+[image3]: ./samples/sample_augmentation.jpg "Random Noise"
 [image4]: ./test_images/example_0.png "Traffic Sign 1"
 [image5]: ./test_images/example_21.png "Traffic Sign 2"
 [image6]: ./test_images/example_28.png "Traffic Sign 3"
 [image7]: ./test_images/example_39.png "Traffic Sign 4"
 [image8]: ./test_images/example_40.png "Traffic Sign 5"
 [image9]: https://camo.githubusercontent.com/3b43f4d1f9a91e44b0373838537daed273b740a0/68747470733a2f2f6769746875622e636f6d2f6a6572656d792d7368616e6e6f6e2f4361724e442d4c654e65742d4c61622f7261772f636434626139373930363137366536303230613462336330383462373531386566336464656435652f6c656e65742e706e67 "Source: Yan LeCun"
+[image10]: ./samples/augmentation_data_graph.jpg "Augmentation graph"
+[image11]: ./samples/sample_normalized.jpg "Normalized sample"
+[image12]: ./samples/sample_prediction.jpg "New image prediction"
+[image13]: ./samples/modified_LeNet.jpg "Modified LeNet"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -69,6 +73,8 @@ Here is an example of a traffic sign image before and after grayscaling.
 ![alt text][image2]
 
 As a last step, I normalized the image data  to the range (-1,1) because it benifits for training data and weights tuning, as described in this article [glossary-of-deep-learning-batch-normalisation](https://medium.com/deeper-learning/glossary-of-deep-learning-batch-normalisation-8266dcd2fa82)
+![alt text][image11]
+
 
 I decided to generate additional data because the number of samples varies comparatively great for different classes. 
 
@@ -79,12 +85,15 @@ Here is an example of an original image and an augmented image:
 ![alt text][image3]
 
 The difference between the original data set and the augmented data set is the following ... 
-
+![alt text][image10]
 
 ####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-I use the same architecture from the LeNet Lab [LeNet](https://github.com/udacity/CarND-LeNet-Lab/blob/master/LeNet-Lab-Solution.ipynb)
+At first, I used the same architecture from the LeNet Lab solution [LeNet](https://github.com/udacity/CarND-LeNet-Lab/blob/master/LeNet-Lab-Solution.ipynb)
 ![alt text][image9]
+But it seemed that the accuracy was hard to meet the least requirement(around 0.9).
+So I decided to make a little change on it, adapted from Sermanet/LeCunn traffic sign classification journal article.
+![alt text][image13]
 
 My final model consisted of the following layers:
 
@@ -97,14 +106,14 @@ My final model consisted of the following layers:
 | Convolution 5x5	    | 1x1 stride, valid padding, outputs 10x10x16 	|
 | ReLU					|												|
 | Max pooling	      	| 2x2 stride,  outputs 5x5x16 				|
+| Convolution 5x5	    | 1x1 stride, valid padding, outputs 1x1x400 	|
+| ReLU					|	
 | Flatten layers (5x5x16 -> 400) |
-| Fully connected		| 400 -> 120 |  
-| ReLU					|
-| Fully connected		| 120 -> 84 | 
-| ReLU					|
-| Fully connected		| 84 -> 43 | 
+| Flatten layers (1x1x400 -> 400) |
+| Concatenate 400 + 400 -> 800 |
+| Dropout 0.5 |
+| Fully connected		| 800 -> 43 |  
  
-
 
 ####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
@@ -115,6 +124,7 @@ The final settings used were:
 * learning rate: 0.001
 * mu: 0
 * sigma: 0.1
+* dropout keep probability: 0.5
 
 ####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
@@ -154,14 +164,14 @@ The code for making predictions on my final model is located in the last two cod
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| 1.0         			|  Speed limit (20km/h)   									| 
-| 1.0     				   | Double curve 										|
-| 1.0					       | Children crossing											|
-| 1.0	      			  | Keep left				 				|
-| 1.0				        | Roundabout mandatory      							|
+| 1.0 | Speed limit (20km/h) | 
+| 1.0 | Double curve 								|
+| 1.0	| Children crossing				|
+| 1.0	| Keep left				 				   |
+| 1.0	| Roundabout mandatory |
 
 
 Here is top 3 prediction graph below:
-
+![alt text][image12]
 
 
